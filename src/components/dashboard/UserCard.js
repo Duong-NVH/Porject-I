@@ -12,11 +12,11 @@ import UserList from "../UserList";
 const useStyles = makeStyles({
   root: {
     color: "white",
-    textAlign: "start",
+    textAlign: "center",
     backgroundColor: "tomato",
   },
   icon: {
-    fontSize: 50,
+    fontSize: 100,
     verticalAlign: "sub",
   },
 });
@@ -26,7 +26,7 @@ export default function SimpleCard(props) {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h4">
+        <Typography variant="h3">
           <PersonIcon className={classes.icon} />
           {`Users: ${props.userList.length}`}
         </Typography>

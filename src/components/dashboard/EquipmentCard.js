@@ -12,10 +12,10 @@ const useStyles = makeStyles({
   root: {
     color: "white",
     backgroundColor: "mediumaquamarine",
-    textAlign: "start",
+    textAlign: "center",
   },
   icon: {
-    fontSize: 50,
+    fontSize: 100,
     verticalAlign: "sub",
   },
 });
@@ -26,7 +26,7 @@ export default function SimpleCard(props) {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h4">
+        <Typography variant="h3">
           <ImportantDevicesIcon className={classes.icon} />
           {` Equipments: ${props.equipmentList.length}`}
         </Typography>

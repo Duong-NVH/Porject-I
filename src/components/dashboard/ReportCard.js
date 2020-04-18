@@ -12,11 +12,11 @@ import Badge from "@material-ui/core/Badge";
 const useStyles = makeStyles({
   root: {
     color: "white",
-    textAlign: "start",
+    textAlign: "center",
     backgroundColor: "#9852f9",
   },
   icon: {
-    fontSize: 50,
+    fontSize: 100,
     verticalAlign: "sub",
   },
 });
@@ -26,11 +26,11 @@ export default function SimpleCard(props) {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h4">
+        <Typography variant="h3">
+          <DescriptionIcon className={classes.icon} />
           <Badge badgeContent={99} color="secondary">
-            <DescriptionIcon className={classes.icon} />
+            {` Reports`}
           </Badge>
-          {` Reports`}
         </Typography>
       </CardContent>
       <Divider />

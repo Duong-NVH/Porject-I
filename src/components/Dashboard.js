@@ -47,16 +47,16 @@ export default class Dashboard extends Component {
           <Divider />
           <div className="dbcontent">
             <Grid container spacing={3}>
-              <Grid item xs={6} sm={2}>
+              <Grid item xs={12} sm={6} lg={3}>
                 <NotiCard />
               </Grid>
-              <Grid item xs={6} sm={2}>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
                 <ReportCard />
               </Grid>
-              <Grid item xs={12} sm={4} md={2}>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
                 <UserCard userList={this.props.userList} />
               </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={6} lg={3}>
                 <EquipmentCard equipmentList={this.props.equipmentList} />
               </Grid>
             </Grid>
