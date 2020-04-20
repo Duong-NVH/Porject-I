@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import MenuItem from "@material-ui/core/MenuItem";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -33,12 +34,61 @@ export default function FormDialog() {
           <DialogContentText>
             Fill the informations of the new equipment.
           </DialogContentText>
-          <TextField autoFocus label="Name" type="text" fullWidth />
           <TextField
             autoFocus
-            label="Maintainace data "
+            label="Name"
             type="text"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            autoFocus
+            label="ID"
+            type="text"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            autoFocus
+            label="Location"
+            type="text"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            select
+            autoFocus
+            label="Condition"
+            value={1}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          >
+            <MenuItem value={1}>Good</MenuItem>
+            <MenuItem value={0}>Bad</MenuItem>
+          </TextField>
+          <TextField
+            autoFocus
+            label="Current user"
+            type="text"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            label="Maintainace date "
+            type="date"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </DialogContent>
         <DialogActions>
