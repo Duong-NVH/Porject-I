@@ -86,40 +86,32 @@ export default function FormDialog() {
             label="Name"
             type="text"
             fullWidth
+            margin="normal"
             onChange={handleChangeName}
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
           <TextField
             autoFocus
             label="ID"
             type="text"
+            margin="normal"
             fullWidth
             onChange={handleChangeID}
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
           <TextField
             autoFocus
             label="Location"
+            margin="normal"
             type="text"
             fullWidth
             onChange={handleChangeLocation}
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
           <TextField
             select
             autoFocus
             label="Condition"
+            margin="normal"
             value={"Good"}
             onChange={handleChangeCondition}
-            InputLabelProps={{
-              shrink: true,
-            }}
           >
             <MenuItem value={"Good"}>Good</MenuItem>
             <MenuItem value={"Bad"}>Bad</MenuItem>
@@ -127,15 +119,14 @@ export default function FormDialog() {
           <TextField
             autoFocus
             label="Current user"
+            margin="normal"
             type="text"
             fullWidth
             onChange={handleChangeUser}
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
           <TextField
-            label="Maintainace date "
+            label="Maintenance date "
+            margin="normal"
             type="date"
             fullWidth
             onChange={handleChangeMaintenance}

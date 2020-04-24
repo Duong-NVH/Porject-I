@@ -20,8 +20,8 @@ export default class Home extends React.Component {
   }
 
   async loadData() {
-    const ul = [];
-    const el = [];
+    let ul = [];
+    let el = [];
     let u = null;
     await db
       .collection("Users")
@@ -29,29 +29,29 @@ export default class Home extends React.Component {
       .get()
       .then((you) => {
         u = you.data();
-      });
-    await db
-      .collection("Users")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          ul.push(doc.data());
+        this.setState({
+          you: u,
         });
       });
-
-    await db
-      .collection("Equipment")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          el.push(doc.data());
-        });
+    await db.collection("Users").onSnapshot((querySnapshot) => {
+      ul = [];
+      querySnapshot.docs.map((doc) => {
+        ul.push(doc.data());
+        return doc.data;
       });
+      this.setState({
+        userList: ul,
+      });
+    });
 
-    await this.setState({
-      you: u,
-      userList: ul,
-      equipmentList: el,
+    await db.collection("Equipment").onSnapshot((querySnapshot) => {
+      el = [];
+      querySnapshot.forEach((doc) => {
+        el.push(doc.data());
+      });
+      this.setState({
+        equipmentList: el,
+      });
     });
   }
 

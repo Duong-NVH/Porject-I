@@ -28,9 +28,8 @@ export default function SimpleCard(props) {
       <CardContent>
         <Typography variant="h3">
           <ImportantDevicesIcon className={classes.icon} />
-          {` Equipments: ${props.equipmentList.length}`}
+          {` Equipments: ${props.equipmentList && props.equipmentList.length}`}
         </Typography>
-        <Typography variant="h6">In good condition: 90%</Typography>
       </CardContent>
       <Divider />
       <CardActions>

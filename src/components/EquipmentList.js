@@ -15,6 +15,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ReportIcon from "@material-ui/icons/Report";
+import TextField from "@material-ui/core/TextField";
+import SearchIcon from "@material-ui/icons/Search";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import fb from "../config/fb";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -33,15 +40,29 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function FullScreenDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [searchInput, setSearchInput] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
+  const changeSearchInput = (e) => {
+    setSearchInput(e.target.value);
+  };
+  const editEquipment = (id) => {
+    console.log(`Edited ${id}`);
+  };
+  const deleteEquipment = (id) => {
+    fb.firestore()
+      .collection("Equipment")
+      .doc(id)
+      .delete()
+      .then(() => alert(`Deleted Equipment #${id}`))
+      .catch((error) => {
+        alert("ERROR: ", error);
+      });
+  };
   return (
     <div>
       <Button color="default" onClick={handleClickOpen}>
@@ -66,34 +87,69 @@ export default function FullScreenDialog(props) {
             <Typography variant="h6" className={classes.title}>
               Equipment list
             </Typography>
+            <TextField
+              value={searchInput}
+              onChange={changeSearchInput}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </Toolbar>
         </AppBar>
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="simple table"
+          >
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>ID</TableCell>
-                <TableCell>User</TableCell>
+                <TableCell>User(ID)</TableCell>
                 <TableCell>Location</TableCell>
                 <TableCell>Condition</TableCell>
                 <TableCell>Maintenance</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {props.equipmentList &&
-                props.equipmentList.map((equipment) => {
-                  return (
-                    <TableRow key={equipment.id}>
-                      <TableCell>{equipment.name}</TableCell>
-                      <TableCell>{equipment.id}</TableCell>
-                      <TableCell>{equipment.user}</TableCell>
-                      <TableCell>{equipment.location}</TableCell>
-                      <TableCell>{equipment.condition}</TableCell>
-                      <TableCell>{equipment.maintenance}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                props.equipmentList
+                  .filter(
+                    (equipment) =>
+                      equipment.id.includes(searchInput.toLowerCase()) ||
+                      equipment.name.includes(searchInput.toLowerCase()) ||
+                      equipment.location.includes(searchInput.toLowerCase()) ||
+                      equipment.user.includes(searchInput.toLowerCase())
+                  )
+                  .map((equipment) => {
+                    return (
+                      <TableRow key={equipment.id}>
+                        <TableCell>{equipment.name}</TableCell>
+                        <TableCell>{equipment.id}</TableCell>
+                        <TableCell>{equipment.user}</TableCell>
+                        <TableCell>{equipment.location}</TableCell>
+                        <TableCell>{equipment.condition}</TableCell>
+                        <TableCell>{equipment.maintenance}</TableCell>
+                        <TableCell>
+                          <Button onClick={() => editEquipment(equipment.id)}>
+                            <EditIcon />
+                          </Button>
+                          <Button onClick={() => deleteEquipment(equipment.id)}>
+                            <DeleteIcon />
+                          </Button>
+                          <Button>
+                            <ReportIcon />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>
