@@ -15,13 +15,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ReportIcon from "@material-ui/icons/Report";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import fb from "../config/fb";
+import AddEquipmentDialog from "./AddEquipmentDialog";
+import EditEquipmentDialog from "./EditEquipmentDialog";
+import NewReportDialog from "./NewReportDialog";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -50,9 +51,7 @@ export default function FullScreenDialog(props) {
   const changeSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
-  const editEquipment = (id) => {
-    console.log(`Edited ${id}`);
-  };
+
   const deleteEquipment = (id) => {
     fb.firestore()
       .collection("Equipment")
@@ -87,6 +86,7 @@ export default function FullScreenDialog(props) {
             <Typography variant="h6" className={classes.title}>
               Equipment list
             </Typography>
+            <AddEquipmentDialog />
             <TextField
               value={searchInput}
               onChange={changeSearchInput}
@@ -137,14 +137,14 @@ export default function FullScreenDialog(props) {
                         <TableCell>{equipment.condition}</TableCell>
                         <TableCell>{equipment.maintenance}</TableCell>
                         <TableCell>
-                          <Button onClick={() => editEquipment(equipment.id)}>
-                            <EditIcon />
+                          <Button>
+                            <EditEquipmentDialog equipment={equipment} />
                           </Button>
                           <Button onClick={() => deleteEquipment(equipment.id)}>
                             <DeleteIcon />
                           </Button>
                           <Button>
-                            <ReportIcon />
+                            <NewReportDialog equipmentID={equipment.id} />
                           </Button>
                         </TableCell>
                       </TableRow>

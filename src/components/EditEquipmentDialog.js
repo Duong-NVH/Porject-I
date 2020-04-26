@@ -8,16 +8,18 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
 import fb from ".././config/fb";
-import AddIcon from "@material-ui/icons/Add";
+import EditIcon from "@material-ui/icons/Edit";
 
-export default function FormDialog() {
+export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [id, setID] = React.useState("");
-  const [condition, setCondition] = React.useState("Good");
-  const [location, setLocation] = React.useState("");
-  const [maintenance, setMaintenance] = React.useState("");
-  const [user, setUser] = React.useState("");
+  const [name, setName] = React.useState(props.equipment.name);
+  const [id, setID] = React.useState(props.equipment.id);
+  const [condition, setCondition] = React.useState(props.equipment.condition);
+  const [location, setLocation] = React.useState(props.equipment.location);
+  const [maintenance, setMaintenance] = React.useState(
+    props.equipment.maintenance
+  );
+  const [user, setUser] = React.useState(props.equipment.user);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,14 +46,7 @@ export default function FormDialog() {
   const handleChangeUser = (e) => {
     setUser(e.target.value);
   };
-  const addNewEquipment = (
-    name,
-    id,
-    condition,
-    location,
-    maintenance,
-    user
-  ) => {
+  const editEquipment = (name, id, condition, location, maintenance, user) => {
     fb.firestore()
       .collection("Equipment")
       .doc(id)
@@ -70,25 +65,27 @@ export default function FormDialog() {
   return (
     <div>
       <Button color="default" onClick={handleClickOpen}>
-        <AddIcon />
+        <EditIcon />
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Equipment</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Equipment</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill the informations of the new equipment.
+            {`Change the informations of the equipment #${id}`}
           </DialogContentText>
           <TextField
             autoFocus
+            disabled
             label="ID"
             type="text"
             margin="normal"
             fullWidth
             onChange={handleChangeID}
+            value={id}
           />
           <TextField
             autoFocus
@@ -97,6 +94,7 @@ export default function FormDialog() {
             fullWidth
             margin="normal"
             onChange={handleChangeName}
+            value={name}
           />
 
           <TextField
@@ -106,14 +104,15 @@ export default function FormDialog() {
             type="text"
             fullWidth
             onChange={handleChangeLocation}
+            value={location}
           />
           <TextField
             select
             autoFocus
             label="Condition"
             margin="normal"
-            value={"Good"}
             onChange={handleChangeCondition}
+            value={condition}
           >
             <MenuItem value={"Good"}>Good</MenuItem>
             <MenuItem value={"Bad"}>Bad</MenuItem>
@@ -125,6 +124,7 @@ export default function FormDialog() {
             type="text"
             fullWidth
             onChange={handleChangeUser}
+            value={user}
           />
           <TextField
             label="Maintenance date "
@@ -132,6 +132,7 @@ export default function FormDialog() {
             type="date"
             fullWidth
             onChange={handleChangeMaintenance}
+            value={maintenance}
             InputLabelProps={{
               shrink: true,
             }}
@@ -143,7 +144,7 @@ export default function FormDialog() {
           </Button>
           <Button
             onClick={() =>
-              addNewEquipment(name, id, condition, location, maintenance, user)
+              editEquipment(name, id, condition, location, maintenance, user)
             }
             color="secondary"
           >
