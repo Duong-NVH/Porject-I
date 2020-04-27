@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
                 <NotiCard />
               </Grid>
               <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ReportCard />
+                <ReportCard reportList={this.props.reportList} />
               </Grid>
               <Grid item xs={12} sm={6} md={4} lg={2}>
                 <UserCard userList={this.props.userList} />

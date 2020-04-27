@@ -31,6 +31,7 @@ export default function FormDialog(props) {
       .add({
         text,
         time: now,
+        equipmentID,
       })
       .then(() => handleClose())
       .catch((error) => alert("Error: ", error));

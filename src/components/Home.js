@@ -13,6 +13,7 @@ export default class Home extends React.Component {
       you: null,
       userList: null,
       equipmentList: null,
+      reportList: null,
     };
   }
   componentDidMount() {
@@ -22,6 +23,7 @@ export default class Home extends React.Component {
   async loadData() {
     let ul = [];
     let el = [];
+    let rl = [];
     let u = null;
     await db
       .collection("Users")
@@ -53,10 +55,21 @@ export default class Home extends React.Component {
         equipmentList: el,
       });
     });
+
+    await db.collection("Report").onSnapshot((querySnapshot) => {
+      rl = [];
+      querySnapshot.docs.map((doc) => {
+        rl.push(doc.data());
+        return doc.data;
+      });
+      this.setState({
+        reportList: rl,
+      });
+    });
   }
 
   render() {
-    return this.state.userList ? (
+    return this.state.equipmentList ? (
       <div>
         <Drawer
           userList={this.state.userList}
@@ -69,6 +82,7 @@ export default class Home extends React.Component {
             you={this.state.you}
             userList={this.state.userList}
             equipmentList={this.state.equipmentList}
+            reportList={this.state.reportList}
           />
         </div>
       </div>

@@ -6,8 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import DescriptionIcon from "@material-ui/icons/Description";
 import Divider from "@material-ui/core/Divider";
-import Button from "@material-ui/core/Button";
 import Badge from "@material-ui/core/Badge";
+import ReportList from "../ReportList";
 
 const useStyles = makeStyles({
   root: {
@@ -28,14 +28,17 @@ export default function SimpleCard(props) {
       <CardContent>
         <Typography variant="h3">
           <DescriptionIcon className={classes.icon} />
-          <Badge badgeContent={99} color="secondary">
+          <Badge
+            badgeContent={props.reportList && props.reportList.length}
+            color="secondary"
+          >
             {` Reports`}
           </Badge>
         </Typography>
       </CardContent>
       <Divider />
       <CardActions>
-        <Button>Show</Button>
+        <ReportList reportList={props.reportList} />
       </CardActions>
     </Card>
   );
