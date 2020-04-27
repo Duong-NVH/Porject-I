@@ -24,7 +24,7 @@ export default function FormDialog(props) {
     setText(e.target.value);
   };
 
-  const addNewReport = (text, equipmentID) => {
+  const addNewReport = (text, equipmentID, user) => {
     const now = new Date();
     fb.firestore()
       .collection("Report")
@@ -32,6 +32,7 @@ export default function FormDialog(props) {
         text,
         time: now,
         equipmentID,
+        user: user.email,
       })
       .then(() => handleClose())
       .catch((error) => alert("Error: ", error));
@@ -68,7 +69,7 @@ export default function FormDialog(props) {
             Cancel [x]
           </Button>
           <Button
-            onClick={() => addNewReport(text, props.equipmentID)}
+            onClick={() => addNewReport(text, props.equipmentID, props.you)}
             color="secondary"
           >
             Submit

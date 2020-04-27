@@ -62,7 +62,10 @@ export default function FormDialog(props) {
                         {`Report about #${report.equipmentID}:`}
                       </Typography>
                       <Typography variant="caption" gutterBottom>
-                        <em>{`${convertTime(report.time)}`}</em>
+                        <em>{`By ${report.user}`}</em>
+                      </Typography>
+                      <Typography variant="caption" gutterBottom>
+                        <em>{` at ${convertTime(report.time)}`}</em>
                       </Typography>
                       <Typography variant="body1" gutterBottom>
                         {`${report.text}`}

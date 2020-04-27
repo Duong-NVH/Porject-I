@@ -144,7 +144,10 @@ export default function FullScreenDialog(props) {
                             <DeleteIcon />
                           </Button>
                           <Button>
-                            <NewReportDialog equipmentID={equipment.id} />
+                            <NewReportDialog
+                              equipmentID={equipment.id}
+                              you={props.you}
+                            />
                           </Button>
                         </TableCell>
                       </TableRow>

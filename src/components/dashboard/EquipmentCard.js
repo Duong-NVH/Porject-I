@@ -33,7 +33,7 @@ export default function SimpleCard(props) {
       </CardContent>
       <Divider />
       <CardActions>
-        <EquipmentList equipmentList={props.equipmentList} />
+        <EquipmentList equipmentList={props.equipmentList} you={props.you} />
         <AddEquipmentDialog />
       </CardActions>
     </Card>

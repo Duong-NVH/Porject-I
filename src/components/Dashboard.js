@@ -57,7 +57,10 @@ export default class Dashboard extends Component {
                 <UserCard userList={this.props.userList} />
               </Grid>
               <Grid item xs={12} sm={6} lg={3}>
-                <EquipmentCard equipmentList={this.props.equipmentList} />
+                <EquipmentCard
+                  equipmentList={this.props.equipmentList}
+                  you={this.props.you}
+                />
               </Grid>
             </Grid>
           </div>
