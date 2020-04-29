@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
           <div className="dbcontent">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6} lg={3}>
-                <NotiCard />
+                <NotiCard equipmentList={this.props.equipmentList} />
               </Grid>
               <Grid item xs={12} sm={6} md={4} lg={2}>
                 <ReportCard reportList={this.props.reportList} />

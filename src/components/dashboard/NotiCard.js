@@ -6,8 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import Button from "@material-ui/core/Button";
 import Badge from "@material-ui/core/Badge";
+import NotiList from ".././NotiList";
 
 const useStyles = makeStyles({
   root: {
@@ -23,19 +23,32 @@ const useStyles = makeStyles({
 
 export default function SimpleCard(props) {
   const classes = useStyles();
+  const countNoti = (el) => {
+    let now = new Date();
+    let ans = el.filter(
+      (e) =>
+        e.condition.toLowerCase() === "bad" ||
+        new Date(e.maintenance).getTime() < now.getTime()
+    );
+    console.log(ans);
+    return ans.length;
+  };
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="h3">
           <NotificationsIcon className={classes.icon} />
-          <Badge badgeContent={4} color="secondary">
+          <Badge
+            badgeContent={countNoti(props.equipmentList)}
+            color="secondary"
+          >
             {` Notifications`}
           </Badge>
         </Typography>
       </CardContent>
       <Divider />
       <CardActions>
-        <Button>Show</Button>
+        <NotiList equipmentList={props.equipmentList} />
       </CardActions>
     </Card>
   );
