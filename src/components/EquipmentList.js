@@ -86,7 +86,7 @@ export default function FullScreenDialog(props) {
             <Typography variant="h6" className={classes.title}>
               Equipment list
             </Typography>
-            <AddEquipmentDialog />
+            {props.you && props.you.class === "ADMIN" && <AddEquipmentDialog />}
             <TextField
               value={searchInput}
               onChange={changeSearchInput}
@@ -137,18 +137,18 @@ export default function FullScreenDialog(props) {
                         <TableCell>{equipment.condition}</TableCell>
                         <TableCell>{equipment.maintenance}</TableCell>
                         <TableCell>
-                          <Button>
+                          {props.you.class === "ADMIN" && (
                             <EditEquipmentDialog equipment={equipment} />
-                          </Button>
-                          <Button onClick={() => deleteEquipment(equipment.id)}>
-                            <DeleteIcon />
-                          </Button>
-                          <Button>
-                            <NewReportDialog
-                              equipmentID={equipment.id}
-                              you={props.you}
+                          )}
+                          {props.you.class === "ADMIN" && (
+                            <DeleteIcon
+                              onClick={() => deleteEquipment(equipment.id)}
                             />
-                          </Button>
+                          )}
+                          <NewReportDialog
+                            equipmentID={equipment.id}
+                            you={props.you}
+                          />
                         </TableCell>
                       </TableRow>
                     );

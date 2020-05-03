@@ -155,14 +155,6 @@ export default function PersistentDrawerLeft(props) {
               <EquipmentList />
             </ListItemText>
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <AddEquipmentDialog />
-            </ListItemText>
-          </ListItem>
         </List>
         <Divider />
         <List>
@@ -174,14 +166,6 @@ export default function PersistentDrawerLeft(props) {
               <UserList userList={props.userList} />
             </ListItemText>
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <AddUserDialog />
-            </ListItemText>
-          </ListItem>
         </List>
         <Divider />
         <List>
@@ -191,6 +175,7 @@ export default function PersistentDrawerLeft(props) {
             </ListItemIcon>
             <ListItemText primary="Notifications" />
           </ListItem>
+          <Divider />
           <ListItem button onClick={() => fb.auth().signOut()}>
             <ListItemIcon>
               <MeetingRoomIcon />

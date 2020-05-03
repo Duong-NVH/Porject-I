@@ -50,11 +50,14 @@ export default class Dashboard extends Component {
               <Grid item xs={12} sm={6} lg={3}>
                 <NotiCard equipmentList={this.props.equipmentList} />
               </Grid>
+              {this.props.you.class === "ADMIN" && (
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <ReportCard reportList={this.props.reportList} />
+                </Grid>
+              )}
+
               <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ReportCard reportList={this.props.reportList} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <UserCard userList={this.props.userList} />
+                <UserCard userList={this.props.userList} you={this.props.you} />
               </Grid>
               <Grid item xs={12} sm={6} lg={3}>
                 <EquipmentCard

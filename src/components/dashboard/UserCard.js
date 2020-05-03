@@ -34,7 +34,7 @@ export default function SimpleCard(props) {
       <Divider />
       <CardActions>
         <UserList userList={props.userList} />
-        <AddUserDialog />
+        {props.you.class === "ADMIN" && <AddUserDialog />}
       </CardActions>
     </Card>
   );

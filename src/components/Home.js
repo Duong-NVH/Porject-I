@@ -72,6 +72,7 @@ export default class Home extends React.Component {
     return this.state.equipmentList ? (
       <div>
         <Drawer
+          you={this.state.you}
           userList={this.state.userList}
           equipmentList={this.state.equipmentList}
           dark={this.props.dark}
