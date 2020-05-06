@@ -77,6 +77,7 @@ export default class Home extends React.Component {
           equipmentList={this.state.equipmentList}
           dark={this.props.dark}
           handleDarkMode={this.props.handleDarkMode}
+          reportList={this.state.reportList}
         />
         <div className="content">
           <Dashboard

@@ -16,19 +16,18 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import ListIcon from "@material-ui/icons/List";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import UserList from "./UserList";
 import EquipmentList from "./EquipmentList";
-import AddUserDialog from "./AddUserDialog";
-import AddEquipmentDialog from "./AddEquipmentDialog";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import DescriptionIcon from "@material-ui/icons/Description";
+import ReportList from "./ReportList";
+import NotiList from "./NotiList";
 import fb from "../config/fb";
 
 const drawerWidth = 225;
@@ -152,12 +151,12 @@ export default function PersistentDrawerLeft(props) {
               <ListIcon />
             </ListItemIcon>
             <ListItemText>
-              <EquipmentList />
+              <EquipmentList
+                equipmentList={props.equipmentList}
+                you={props.you}
+              />
             </ListItemText>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
           <ListItem button>
             <ListItemIcon>
               <SupervisorAccountIcon />
@@ -166,15 +165,26 @@ export default function PersistentDrawerLeft(props) {
               <UserList userList={props.userList} />
             </ListItemText>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
           <ListItem button>
             <ListItemIcon>
               <NotificationsIcon />
             </ListItemIcon>
-            <ListItemText primary="Notifications" />
+            <ListItemText>
+              <NotiList equipmentList={props.equipmentList} />
+            </ListItemText>
           </ListItem>
+          {props.you.classes === "ADMIN" && (
+            <ListItem button>
+              <ListItemIcon>
+                <DescriptionIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <ReportList reportList={props.reportList} />
+              </ListItemText>
+            </ListItem>
+          )}
+        </List>
+        <List>
           <Divider />
           <ListItem button onClick={() => fb.auth().signOut()}>
             <ListItemIcon>
