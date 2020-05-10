@@ -36,7 +36,7 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>Show</Button>
+      <Button onClick={handleClickOpen}>Noti List</Button>
       <Dialog
         open={open}
         onClose={handleClose}

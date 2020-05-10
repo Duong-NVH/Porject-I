@@ -140,11 +140,15 @@ export default function FullScreenDialog(props) {
                           {props.you.class === "ADMIN" && (
                             <EditEquipmentDialog equipment={equipment} />
                           )}
+
                           {props.you.class === "ADMIN" && (
-                            <DeleteIcon
-                              onClick={() => deleteEquipment(equipment.id)}
-                            />
+                            <Button>
+                              <DeleteIcon
+                                onClick={() => deleteEquipment(equipment.id)}
+                              />
+                            </Button>
                           )}
+
                           <NewReportDialog
                             equipmentID={equipment.id}
                             you={props.you}

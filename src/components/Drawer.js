@@ -173,7 +173,7 @@ export default function PersistentDrawerLeft(props) {
               <NotiList equipmentList={props.equipmentList} />
             </ListItemText>
           </ListItem>
-          {props.you.classes === "ADMIN" && (
+          {props.you.class === "ADMIN" && (
             <ListItem button>
               <ListItemIcon>
                 <DescriptionIcon />
