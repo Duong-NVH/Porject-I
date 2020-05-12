@@ -6,11 +6,27 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import fb from "../config/fb";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [userClass, setUserClass] = React.useState("STAFF");
 
+  const handleChangeName = (e) => setName(e.target.value);
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleChangeClass = (e) => {
+    setUserClass(e.target.value);
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -18,7 +34,23 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  const createUser = (email, password) => {};
+  const createUser = (name, email, password, userClass) => {
+    // let userID = "";
+    // fb.auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then(() => {
+    //     fb.auth().onAuthStateChanged((user) => {
+    //       userID = user.uid;
+    //       fb.firestore().collection("Users").doc(userID).set({
+    //         name,
+    //         email,
+    //         password,
+    //         userClass,
+    //         id: userID,
+    //       });
+    //     });
+    //   });
+  };
 
   return (
     <div>
@@ -35,15 +67,45 @@ export default function FormDialog() {
           <DialogContentText>
             Fill the informations of the new user.
           </DialogContentText>
-          <TextField autoFocus label="Email Address" type="email" fullWidth />
-          <TextField autoFocus label="Password" type="text" fullWidth />
-          <TextField autoFocus label="Class" type="text" fullWidth />
+          <Select
+            autoFocus
+            label="Class"
+            value={userClass}
+            onChange={handleChangeClass}
+          >
+            <MenuItem value={"STAFF"}>STAFF</MenuItem>
+            <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+          </Select>
+          <TextField
+            autoFocus
+            label="Name"
+            type="text"
+            onChange={handleChangeName}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            label="Email Address"
+            type="email"
+            onChange={handleChangeEmail}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            label="Password"
+            type="text"
+            onChange={handleChangePassword}
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="default">
             Cancel [x]
           </Button>
-          <Button onClick={handleClose} color="secondary">
+          <Button
+            onClick={() => createUser(name, email, password, userClass)}
+            color="secondary"
+          >
             Submit
           </Button>
         </DialogActions>
