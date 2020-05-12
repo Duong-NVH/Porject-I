@@ -7,7 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 import Divider from "@material-ui/core/Divider";
 import AddEquipmentDialog from "../AddEquipmentDialog";
+import Button from "@material-ui/core/Button";
 import EquipmentList from "../EquipmentList";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import { CSVLink } from "react-csv";
 const useStyles = makeStyles({
   root: {
     color: "white",
@@ -35,6 +38,13 @@ export default function SimpleCard(props) {
       <CardActions>
         <EquipmentList equipmentList={props.equipmentList} you={props.you} />
         {props.you.class === "ADMIN" && <AddEquipmentDialog />}
+        {props.you.class === "ADMIN" && (
+          <Button variant="outlined" color="primary">
+            <CSVLink data={props.equipmentList} filename={"EquipmentList.csv"}>
+              <GetAppIcon />
+            </CSVLink>
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
