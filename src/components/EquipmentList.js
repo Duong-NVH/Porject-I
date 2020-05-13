@@ -138,21 +138,24 @@ export default function FullScreenDialog(props) {
                         <TableCell>{equipment.maintenance}</TableCell>
                         <TableCell>
                           {props.you.class === "ADMIN" && (
-                            <EditEquipmentDialog equipment={equipment} />
-                          )}
-
-                          {props.you.class === "ADMIN" && (
                             <Button>
-                              <DeleteIcon
-                                onClick={() => deleteEquipment(equipment.id)}
-                              />
+                              <EditEquipmentDialog equipment={equipment} />
                             </Button>
                           )}
 
-                          <NewReportDialog
-                            equipmentID={equipment.id}
-                            you={props.you}
-                          />
+                          {props.you.class === "ADMIN" && (
+                            <Button
+                              onClick={() => deleteEquipment(equipment.id)}
+                            >
+                              <DeleteIcon />
+                            </Button>
+                          )}
+                          <Button>
+                            <NewReportDialog
+                              equipmentID={equipment.id}
+                              you={props.you}
+                            />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     );

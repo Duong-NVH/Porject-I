@@ -40,9 +40,10 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <Button color="default" onClick={handleClickOpen}>
-        <ReportIcon />
-      </Button>
+      {/* <Button color="default" onClick={handleClickOpen}>
+        
+      </Button> */}
+      <ReportIcon onClick={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
